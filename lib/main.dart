@@ -24,11 +24,6 @@ class ScheduleExample extends State<AgendaDetails> {
   CalendarController _calendarController= CalendarController();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
