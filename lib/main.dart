@@ -21,40 +21,28 @@ class AgendaDetails extends StatefulWidget {
 }
 
 class ScheduleExample extends State<AgendaDetails> {
-  CalendarView _calendarView;
-  CalendarController _calendarController;
-
-  @override
-  void initState() {
-    _calendarView = CalendarView.month;
-    _calendarController = CalendarController();
-    super.initState();
-  }
+  CalendarController _calendarController= CalendarController();
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Column(
-          children: <Widget>[
-            Expanded(
-              child: SfCalendar(
-                view: _calendarView,
-                controller: _calendarController,
-                monthViewSettings: MonthViewSettings(showAgenda: true),
-                dataSource: getCalendarDataSource(),
-                onViewChanged: viewChanged,
-              ),
-            ),
-          ],
+        body: SafeArea(
+          child: SfCalendar(
+            view: CalendarView.month,
+            controller: _calendarController,
+            monthViewSettings: MonthViewSettings(showAgenda: true),
+            dataSource: getCalendarDataSource(),
+            onViewChanged: viewChanged,
+          ),
         ),
       ),
     );
   }
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
-    SchedulerBinding.instance.addPostFrameCallback((duration) {
+    SchedulerBinding.instance!.addPostFrameCallback((duration) {
       var midDate = (viewChangedDetails
           .visibleDates[viewChangedDetails.visibleDates.length ~/ 2]);
       if (midDate.month == DateTime
