@@ -1,4 +1,4 @@
-package com.example.flutter_agenda_controller
+package com.example.month_agenda_programatic_selection
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,27 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-void main() => runApp(AgendaDetailsController());
+void main() => runApp(const AgendaDetailsController());
 
 class AgendaDetailsController extends StatelessWidget {
+  const AgendaDetailsController({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       home: AgendaDetails(),
-    ) ;
+    );
   }
 }
 
 class AgendaDetails extends StatefulWidget {
+  const AgendaDetails({super.key});
+
   @override
   State<StatefulWidget> createState() => ScheduleExample();
 }
 
 class ScheduleExample extends State<AgendaDetails> {
-  CalendarController _calendarController= CalendarController();
+  final CalendarController _calendarController = CalendarController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +35,7 @@ class ScheduleExample extends State<AgendaDetails> {
           child: SfCalendar(
             view: CalendarView.month,
             controller: _calendarController,
-            monthViewSettings: MonthViewSettings(showAgenda: true),
+            monthViewSettings: const MonthViewSettings(showAgenda: true),
             dataSource: getCalendarDataSource(),
             onViewChanged: viewChanged,
           ),
@@ -42,14 +45,12 @@ class ScheduleExample extends State<AgendaDetails> {
   }
 
   void viewChanged(ViewChangedDetails viewChangedDetails) {
-    SchedulerBinding.instance!.addPostFrameCallback((duration) {
+    SchedulerBinding.instance.addPostFrameCallback((duration) {
       var midDate = (viewChangedDetails
           .visibleDates[viewChangedDetails.visibleDates.length ~/ 2]);
-      if (midDate.month == DateTime
-          .now()
-          .month)
+      if (midDate.month == DateTime.now().month) {
         _calendarController.selectedDate = DateTime.now();
-      else {
+      } else {
         _calendarController.selectedDate = DateTime(
           midDate.year,
           midDate.month,
